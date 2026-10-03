@@ -258,7 +258,7 @@ function bCanPlay(){return B&&!B.finished&&B.turn===0}
 function bDraw(takeDiscard=false){
  if(!B||B.finished||B.drawn)return false;
  if(takeDiscard){if(!B.discard.length)return false;B.hands[B.turn].push(...B.discard.splice(0))}
- else {if(!B.deck.length)return false;B.hands[B.turn].push(B.deck.pop())}
+ else {if(!B.deck.length){B.finished=true;B.score=[bStateScore(0),bStateScore(1)];B.message="Tallone terminato: mano conclusa.";bRender();return false}B.hands[B.turn].push(B.deck.pop())}
  B.drawn=true;B.message="Puoi calare combinazioni o scartare una carta.";bRender();return true;
 }
 function bLay(player,indices,target=null){
@@ -270,6 +270,8 @@ function bLay(player,indices,target=null){
  if(target!==null&&!meld)return false;
  const combined=meld?meld.cards.concat(cards):cards;
  if(!bMeldType(combined))return false;
+ // A team that has already taken its pocket must keep a card for the mandatory closing discard.
+ if(B.taken[team]&&ids.length===hand.length)return false;
  if(meld)meld.cards=combined;else B.melds[team].push({cards:combined});
  for(let i of ids.slice().reverse())hand.splice(i,1);
  bSelection.clear();B.message=cards.length+" carta/e calata/e.";
@@ -322,7 +324,7 @@ function bBot(){
  if(!B.drawn){
    // Choose discard pile when it contributes an immediately usable meld.
    const pile=B.discard,shouldTake=pile.length&&pile.length<=7&&mode!=="easy"&&!!bFindMeld(hand.concat(pile));
-   bDraw(!!shouldTake);
+   if(!bDraw(!!shouldTake))return;
  }
  let attempts=0;
  while(attempts++<35&&!B.finished&&B.turn===player){
@@ -341,6 +343,7 @@ function bBot(){
    break;
  }
  if(B.finished)return;
+ if(!B.hands[player].length){B.drawn=false;B.turn=(B.turn+1)%B.count;B.round++;bRender();bSchedule();return}
  let ix=0;
  if(mode==="easy")ix=Math.floor(Math.random()*B.hands[player].length);
  else{
@@ -380,7 +383,7 @@ function bRender(){
   line.title=team===mine?"Seleziona carte e tocca qui per aggiungerle al gioco":"Combinazione avversaria";
   for(let card of meld.cards){const s=document.createElement("span");s.className="mini"+(["♥","♦"].includes(card.suit)?" red":"");s.textContent=bName(card);line.append(s)}
   if(bBonus(meld.cards)){const b=document.createElement("small");b.textContent="+"+bBonus(meld.cards);line.append(b)}
-  if(team===mine)line.onclick=()=>{const indices=B.hands[0].map((c,i)=>bSelection.has(c.id)?i:-1).filter(i=>i>=0);if(!bLay(0,indices,idx))B.message="Carte incompatibili con questo gioco.";bRender()};
+  if(team===mine)line.onclick=()=>{const indices=B.hands[0].map((c,i)=>bSelection.has(c.id)?i:-1).filter(i=>i>=0);if(!bLay(0,indices,idx))B.message="Gioco non valido oppure devi conservare una carta per lo scarto finale.";bRender()};
   el.append(line)
  }}
  fill("bpOurs",mine);fill("bpTheirs",enemy);
