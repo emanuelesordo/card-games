@@ -90,7 +90,15 @@ footer{display:none}
 #home .notice{flex:0 1 auto}
 @media(max-height:570px){#home .notice{display:none}#home>.hero p{display:none}#home>.panel h2{display:none}}
 #tablePage .card .suit{display:flex;align-items:center;justify-content:center;width:55%;height:43%}#tablePage .card .suit svg{width:100%;height:100%;display:block}#tablePage .card.trick-winner{outline:3px solid #f4d477;box-shadow:0 0 18px #ffe19a;transform:translateY(-4px)}#tablePage .turn{white-space:normal;line-height:1.25}
-#tablePage .trick{position:relative;padding-top:clamp(58px,10vh,90px)}#tablePage #trump{position:absolute;top:2px;left:50%;transform:translateX(-50%);width:clamp(55px,10vh,86px);height:clamp(55px,10vh,86px);border:2px solid #e9ca79;background:#09251d;border-radius:12px;padding:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px #0008;z-index:2}#tablePage #trump{font-size:clamp(2rem,5vh,3rem);line-height:1}#tablePage #trump svg{width:100%;height:100%;display:block}#tablePage .trickCards{position:relative;z-index:1}</style></head><body><header><div><div class="brand">TAVOLO</div><div class="sub">Giochi di carte italiani</div></div><span class="tag">Mobile first</span></header>
+#tablePage .trick{position:relative;padding-top:clamp(58px,10vh,90px)}#tablePage #trump{position:absolute;top:2px;left:50%;transform:translateX(-50%);width:clamp(55px,10vh,86px);height:clamp(55px,10vh,86px);border:2px solid #e9ca79;background:#09251d;border-radius:12px;padding:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px #0008;z-index:2}#tablePage #trump{font-size:clamp(2rem,5vh,3rem);line-height:1}#tablePage #trump svg{width:100%;height:100%;display:block}#tablePage .trickCards{position:relative;z-index:1}
+/* Briscola: pips, figure and oversized ace, within the available card bounds. */
+#tablePage .card .suit{width:96%;height:60%;min-height:0;line-height:1;overflow:hidden}
+#tablePage .card .suit.pip-face{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:center;justify-items:center;gap:0;font-size:clamp(.55rem,1.65vh,.92rem)}
+#tablePage .card .suit.pip-face span{white-space:nowrap}
+#tablePage .card .suit.pip-face span:last-child:nth-child(odd){grid-column:1/-1}
+#tablePage .card .suit.figure-face{display:flex;align-items:center;justify-content:center;font-size:clamp(1.35rem,4vh,2.4rem)}
+#tablePage .card .suit.ace-face{display:flex;align-items:center;justify-content:center;font-size:clamp(1.7rem,5vh,3rem)}
+</style></head><body><header><div><div class="brand">TAVOLO</div><div class="sub">Giochi di carte italiani</div></div><span class="tag">Mobile first</span></header>
 <main class="wrap"><section id="home"><div class="hero"><h1>Il tavolo è pronto.</h1><p>Briscola con mazzo trevigiano e Burraco. Gioca contro il computer a Briscola o Burraco, con quattro livelli di difficoltà.</p></div>
 <h2>Scegli un gioco</h2><div class="grid"><button class="game-option selected" data-game="briscola"><span class="tag">Giocabile</span><strong>Briscola</strong><small>Carte trevigiane · 2–4 giocatori</small></button><button class="game-option burraco" data-game="burraco"><span class="tag">Giocabile</span><strong>Burraco</strong><small>2 oppure 4 giocatori</small></button></div>
 <div class="panel"><h2>Nuova partita</h2><div class="form-grid"><div><label for="nickname">Il tuo nome</label><input id="nickname" maxlength="24" autocomplete="nickname" placeholder="Inserisci nickname"></div><div><label for="count">Numero giocatori</label><select id="count"><option value="2">2 giocatori</option><option value="3">3 giocatori</option><option value="4">4 giocatori</option></select></div><div><label for="difficulty">Difficoltà dei bot</label><select id="difficulty"><option value="easy">Facile</option><option value="medium" selected>Medio</option><option value="hard">Difficile</option><option value="expert">Esperto</option></select></div></div><div class="notice" id="modeNotice">Modalità single-player: giochi contro il computer.</div><div class="controls"><button id="start">Gioca a Briscola</button></div></div></section>
@@ -110,7 +118,16 @@ function makeDeck(){return SUITS.flatMap(suit=>VALUES.map(value=>({id:suit+"-"+v
 function shuffle(items){for(let i=items.length-1;i>0;i--){const a=new Uint32Array(1);crypto.getRandomValues(a);const j=a[0]%(i+1);[items[i],items[j]]=[items[j],items[i]]}return items}
 function strength(card,lead,trump){return(card.suit===trump?200:card.suit===lead?100:0)+STRENGTH[card.value]}
 function winner(trick,trump){const lead=trick[0].card.suit;return trick.reduce((best,t)=>strength(t.card,lead,trump)>strength(best.card,lead,trump)?t:best,trick[0]).player}
-function cardEl(card,click){const b=document.createElement(click?"button":"div");b.className="card "+card.suit;b.innerHTML="<small>"+(NAMES[card.value]||card.value)+"</small><span class='suit'>"+SYMBOLS[card.suit]+"</span><b>"+card.value+"</b>";if(click)b.addEventListener("click",click);return b}
+function cardEl(card,click){
+ const element=document.createElement(click?"button":"div");
+ element.className="card "+card.suit+" "+(card.value===1?"ace-card":card.value>=8?"figure-card":"pip-card");
+ const suit=SYMBOLS[card.suit];
+ const figures={8:"🏇",9:"🐴",10:"🤴"};
+ const face=card.value===1?suit:(figures[card.value]||Array(card.value).fill(suit).map(x=>"<span>"+x+"</span>").join(""));
+ element.innerHTML="<small>"+(NAMES[card.value]||card.value)+"</small><span class='suit "+(card.value===1?"ace-face":card.value>=8?"figure-face":"pip-face")+"'>"+face+"</span><b>"+card.value+"</b>";
+ if(click)element.addEventListener("click",click);
+ return element;
+}
 function group(player){return state.count===4?player%2:player}
 function startGame(){clearTimeout(timer);const count=Number($("count").value);let deck=makeDeck();if(count===3)deck=deck.filter(c=>c.id!=="denari-2");shuffle(deck);let hands=Array.from({length:count},()=>[]);for(let i=0;i<3;i++)for(let p=0;p<count;p++)hands[p].push(deck.pop());const trump=deck[0];state={count,deck,hands,trump,trick:[],leader:crypto.getRandomValues(new Uint32Array(1))[0]%count,turn:0,round:1,difficulty:$("difficulty").value,history:[],scores:Array.from({length:count===4?2:count},()=>0),finished:false,busy:false};$("home").classList.add("hidden");$("tablePage").style.display="block";state.turn=state.leader;render();scheduleAI()}
 function draw(){if(!state.deck.length)return;for(let i=0;i<state.count;i++){let p=(state.leader+i)%state.count;if(state.deck.length)state.hands[p].push(state.deck.pop())}}
