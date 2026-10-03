@@ -2,6 +2,55 @@
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#102920"><title>Tavolo — Giochi di carte</title>
 <style>
 :root{font-family:system-ui,-apple-system,sans-serif;color:#f5f4ed;background:#0c1c18;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 50% 5%,#214b3c,#102820 60%,#091713)}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:750;background:#e5c887;color:#18251c}button:disabled{opacity:.45;cursor:not-allowed}button.secondary{background:#ffffff18;color:#f5f4ed;border:1px solid #ffffff29}button.selected{outline:2px solid #e5c887}header{padding:18px max(18px,env(safe-area-inset-left));display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff18}.brand{letter-spacing:.19em;font-size:1.15rem;color:#e9d29d;font-weight:900}.sub{color:#bfd1c6;font-size:.85rem}.wrap{width:min(100%,960px);margin:auto;padding:20px 16px 40px}.hero{margin:18px 0 24px}.hero h1{font-size:clamp(2rem,6vw,3.4rem);letter-spacing:-.05em;line-height:1.05;margin:0 0 12px}.hero p{max-width:550px;color:#c7d7cd;line-height:1.5}.panel{background:#ffffff0b;border:1px solid #ffffff20;border-radius:20px;padding:20px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.game-option{text-align:left;min-height:170px;display:flex;flex-direction:column;justify-content:end;background:linear-gradient(145deg,#27543f,#142e27);border:1px solid #ffffff22;color:white;position:relative;overflow:hidden}.game-option.burraco{background:linear-gradient(145deg,#64502b,#243528)}.game-option strong{font-size:1.4rem}.game-option small{margin-top:5px;font-weight:400;color:#dce9de}.tag{display:inline-block;background:#132d26;border:1px solid #b4c3b43d;padding:4px 9px;border-radius:50px;font-size:.72rem;color:#e0dab7}.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}label{display:block;font-size:.82rem;color:#c4d6ca;margin-bottom:5px}input,select{min-width:0;max-width:100%;width:100%;color:#fff;background:#071c17;border:1px solid #667e6d;border-radius:10px;padding:12px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.muted{color:#b7c9bf}.notice{border-left:3px solid #e5c887;padding:10px 12px;background:#e5c88712;margin:14px 0;line-height:1.5}#tablePage{display:none}.table{border:2px solid #ffffff22;border-radius:40px;background:radial-gradient(ellipse,#276248,#12432f);min-height:390px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;box-shadow:inset 0 0 50px #0005}.slot{display:flex;align-items:center;justify-content:center;gap:8px;min-height:78px}.slot .name{font-size:.85rem;background:#071d18bb;padding:7px 11px;border-radius:40px}.trick{display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:center;min-height:150px}.trickCards{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}.card{width:clamp(54px,16vw,87px);height:clamp(85px,24vw,132px);border-radius:9px;border:2px solid #e4d8bd;background:#fffaf0;color:#1f261f;display:flex;align-items:center;justify-content:space-between;flex-direction:column;padding:8px 3px;box-shadow:0 4px 8px #0005;position:relative;transition:transform .15s}.card b{font-size:1.3rem}.card small{font-weight:800;letter-spacing:.01em}.card .suit{font-size:1.25rem}.card.denari{color:#b48400}.card.coppe{color:#b42e24}.card.spade{color:#4a6c80}.card.bastoni{color:#267046}.hand{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:14px 0}.hand .card:hover:not(:disabled){transform:translateY(-7px)}.hand .card:disabled{opacity:.55}.stats{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.87rem}.score{font-size:1.25rem;font-weight:800;color:#e9d29d}.turn{color:#f3dca0;min-height:24px}.hidden{display:none!important}footer{text-align:center;padding:30px 15px;color:#9fb7a9;font-size:.8rem}a{color:#e7d19f}@media(max-width:560px){.grid{grid-template-columns:1fr 1fr}.game-option{min-height:145px;padding:14px}.game-option strong{font-size:1.15rem}.form-grid{grid-template-columns:1fr}.panel{padding:16px}.table{border-radius:25px;min-height:350px;padding:9px}.card{padding:5px 2px}.hand{gap:5px}.wrap{padding:13px 12px 30px}}
+
+/* Viewport-locked responsive layout: lobby and playing table. */
+html,body{width:100%;height:100%;margin:0;overflow:hidden}
+body{height:100vh;height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr);min-height:0}
+header{padding:8px 14px;min-height:0;gap:8px}
+header .brand{font-size:1rem}header .sub{font-size:.69rem}
+.wrap{height:100%;min-height:0;overflow:hidden;padding:8px 12px;width:min(100%,960px)}
+footer{display:none}
+#home{height:100%;min-height:0;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:6px}
+#home>.hero{margin:0}#home>.hero h1{font-size:clamp(1.4rem,4vh,2.5rem);margin:0 0 4px}
+#home>.hero p{font-size:clamp(.72rem,1.6vh,.9rem);margin:0;line-height:1.25}
+#home>h2{display:none}
+#home>.grid{gap:8px}
+#home .game-option{min-height:0;height:clamp(65px,14vh,128px);padding:9px}
+#home .game-option strong{font-size:clamp(.95rem,2.7vh,1.3rem)}
+#home .game-option small{font-size:.72rem}
+#home>.panel{min-height:0;margin:0;padding:clamp(8px,1.8vh,16px);display:flex;flex-direction:column;gap:clamp(5px,1vh,12px);overflow:hidden}
+#home>.panel h2{font-size:clamp(1rem,2.5vh,1.3rem);margin:0}
+#home .form-grid{gap:7px 10px}
+#home label{margin-bottom:3px}
+#home input,#home select{padding:clamp(5px,1.3vh,11px)}
+#home .notice{font-size:clamp(.65rem,1.6vh,.82rem);margin:0;padding:5px 8px;line-height:1.3}
+#home .controls{gap:7px}
+#home .controls button{font-size:clamp(.68rem,1.65vh,.9rem);padding:clamp(6px,1.35vh,11px) 10px}
+#tablePage{height:100%;min-height:0;grid-template-rows:auto minmax(0,1fr);gap:6px}
+#tablePage:not([style*="none"]){display:grid!important}
+#tablePage>.stats{min-height:0}
+#tablePage>.stats button{padding:7px 10px}
+#tablePage>.panel{height:100%;min-height:0;margin:0;padding:clamp(6px,1vh,12px);display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto auto;gap:clamp(3px,.8vh,8px);overflow:hidden}
+#tablePage .turn{margin:0;min-height:0;font-size:clamp(.7rem,1.8vh,.9rem)}
+#tablePage .table{min-height:0;height:100%;padding:clamp(5px,1vh,12px);gap:2px;border-radius:24px}
+#tablePage .slot{min-height:0;flex:0 0 auto;flex-wrap:wrap;gap:4px}
+#tablePage .slot .name{font-size:clamp(.65rem,1.55vh,.82rem);padding:4px 8px}
+#tablePage .trick{min-height:0;flex:1 1 auto;gap:3px}
+#tablePage .trickCards{gap:4px}
+#tablePage .card{width:clamp(38px,min(13vw,8vh),80px);height:clamp(57px,min(19vw,12vh),112px);padding:3px 2px}
+#tablePage .card b{font-size:clamp(.8rem,2vh,1.1rem)}
+#tablePage .card small{font-size:clamp(.52rem,1.3vh,.7rem)}
+#tablePage .card .suit{font-size:clamp(.75rem,2vh,1.1rem)}
+#tablePage .hand{gap:clamp(3px,1vw,8px);padding:0;min-height:0}
+#tablePage h3{font-size:.8rem;margin:0}
+#tablePage .controls button{padding:7px 10px}
+#tablePage .stats{font-size:clamp(.65rem,1.6vh,.85rem)}
+#tablePage .score{font-size:1rem}
+#tablePage .tag{padding:3px 7px;font-size:clamp(.63rem,1.5vh,.75rem)}
+@media(max-width:560px){#home .form-grid{grid-template-columns:1fr 1fr}#home .form-grid>div:first-child{grid-column:1/-1}#home .game-option{height:clamp(64px,12vh,110px)}#home .grid{grid-template-columns:1fr 1fr}#tablePage .table{border-radius:17px}}
+@media(max-height:650px){header{padding:4px 12px}header .sub{display:none}#home .hero p{display:none}#home .game-option{height:clamp(53px,12vh,80px)}#home .notice{font-size:.64rem}#home>.panel{gap:3px}#tablePage .slot .name{padding:2px 5px}#tablePage .card{height:clamp(43px,10vh,80px);width:clamp(32px,7vh,58px)}}
+@media(max-height:430px){#home>.hero{display:none}#home .game-option{height:52px}#home .game-option small{display:none}#home .notice{display:none}#home>.panel{gap:2px}#home label{font-size:.68rem}#home input,#home select{padding:3px 6px}#tablePage .turn{font-size:.68rem}#tablePage .table{padding:3px}}
+
 </style></head><body><header><div><div class="brand">TAVOLO</div><div class="sub">Giochi di carte italiani</div></div><span class="tag">Mobile first</span></header>
 <main class="wrap"><section id="home"><div class="hero"><h1>Il tavolo è pronto.</h1><p>Briscola con mazzo trevigiano e Burraco. Questa versione include la Briscola contro bot regolabili su quattro livelli.</p></div>
 <h2>Scegli un gioco</h2><div class="grid"><button class="game-option selected" data-game="briscola"><span class="tag">Giocabile</span><strong>Briscola</strong><small>Carte trevigiane · 2–4 giocatori</small></button><button class="game-option burraco" data-game="burraco"><span class="tag">In preparazione</span><strong>Burraco</strong><small>2 oppure 4 giocatori</small></button></div>
@@ -20,7 +69,7 @@ function cardEl(card,click){const b=document.createElement(click?"button":"div")
 function group(player){return state.count===4?player%2:player}
 function startGame(){clearTimeout(timer);const count=Number($("count").value);let deck=makeDeck();if(count===3)deck=deck.filter(c=>c.id!=="denari-2");shuffle(deck);let hands=Array.from({length:count},()=>[]);for(let i=0;i<3;i++)for(let p=0;p<count;p++)hands[p].push(deck.pop());const trump=deck[0];state={count,deck,hands,trump,trick:[],leader:0,turn:0,round:1,difficulty:$("difficulty").value,history:[],scores:Array.from({length:count===4?2:count},()=>0),finished:false,busy:false};$("home").classList.add("hidden");$("tablePage").style.display="block";render()}
 function draw(){if(!state.deck.length)return;for(let i=0;i<state.count;i++){let p=(state.leader+i)%state.count;if(state.deck.length)state.hands[p].push(state.deck.pop())}}
-function play(p,index){if(!state||state.finished||state.turn!==p||state.busy)return;const card=state.hands[p].splice(index,1)[0];if(!card)return;state.trick.push({player:p,card});state.history.push({player:p,card,round:state.round});if(state.trick.length===state.count){state.busy=true;render();timer=setTimeout(resolve,950);return}state.turn=(p+1)%state.count;render();scheduleAI()}
+function play(p,index){if(!state||state.finished||state.turn!==p||state.busy)return;const card=state.hands[p].splice(index,1)[0];if(!card)return;state.trick.push({player:p,card});state.history.push({player:p,card,round:state.round});if(state.trick.length===state.count){state.busy=true;render();timer=setTimeout(resolve,3000);return}state.turn=(p+1)%state.count;render();scheduleAI()}
 function resolve(){if(!state)return;const win=winner(state.trick,state.trump.suit);const pts=state.trick.reduce((sum,t)=>sum+POINTS[t.card.value],0);state.scores[group(win)]+=pts;state.leader=win;state.turn=win;state.trick=[];state.busy=false;draw();state.round++;if(state.hands.every(h=>h.length===0)&&state.deck.length===0)state.finished=true;render();scheduleAI()}
 function aiChoice(hand){
  const s=state,mode=s.difficulty;
