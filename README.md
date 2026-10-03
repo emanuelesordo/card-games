@@ -8,7 +8,7 @@ Web app mobile-first per giochi di carte italiani, destinata a GitHub Pages.
 - **Carte trevigiane**: in questa prima versione le carte sono *segnaposto tipografici* per i semi italiani, non illustrazioni originali trevigiane.
 - **Burraco**: presente come voce della home ma **non ancora giocabile**.
 - **Lobby multiplayer, partite private e codice di accesso**: **non implementati**, richiedono il backend.
-- **Briscola CPU**: avversari basilari, non un'IA avanzata.
+- **Briscola CPU**: quattro livelli impostabili dalla schermata iniziale: Facile (carte casuali), Medio (strategie elementari), Difficile (valutazione delle prese e conservazione delle briscole), Esperto (campionamento euristico di possibili mosse future basato sulle carte osservate). Il livello Esperto non è imbattibile e non conosce le carte avversarie.
 - **Partite locali**: non vengono salvate e si perdono ricaricando la pagina.
 
 ## Avvio e pubblicazione
