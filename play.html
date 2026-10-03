@@ -51,16 +51,46 @@ footer{display:none}
 @media(max-height:650px){header{padding:4px 12px}header .sub{display:none}#home .hero p{display:none}#home .game-option{height:clamp(53px,12vh,80px)}#home .notice{font-size:.64rem}#home>.panel{gap:3px}#tablePage .slot .name{padding:2px 5px}#tablePage .card{height:clamp(43px,10vh,80px);width:clamp(32px,7vh,58px)}}
 @media(max-height:430px){#home>.hero{display:none}#home .game-option{height:52px}#home .game-option small{display:none}#home .notice{display:none}#home>.panel{gap:2px}#home label{font-size:.68rem}#home input,#home select{padding:3px 6px}#tablePage .turn{font-size:.68rem}#tablePage .table{padding:3px}}
 
+
+/* Burraco single-player table */
+#burracoPage{display:none;height:100%;min-height:0;grid-template-rows:auto minmax(0,1fr);gap:5px}
+#burracoPage.active{display:grid}
+#burracoPage .bp-head{display:flex;justify-content:space-between;align-items:center;gap:5px;flex-wrap:wrap;font-size:.75rem}
+#burracoPage .bp-head button{padding:7px 9px}
+#burracoPage .bp-body{min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:5px}
+.bp-status{font-size:clamp(.72rem,1.6vh,.9rem);min-height:1.3em;color:#f0d39b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bp-board{min-height:0;overflow:hidden;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:5px;background:radial-gradient(ellipse,#205740,#123a2c);border:1px solid #ffffff22;border-radius:19px;padding:clamp(6px,1.2vh,13px)}
+.bp-players{display:flex;gap:6px;justify-content:space-around;flex-wrap:wrap;font-size:.71rem}
+.bp-player{padding:5px 9px;border-radius:20px;background:#071d18b3}
+.bp-player.turn-now{outline:1px solid #e4c98b}
+.bp-piles{display:flex;justify-content:center;align-items:center;gap:8px}
+.bp-pile{padding:5px 9px;min-width:76px;border-radius:8px;border:1px solid #ffffff55;background:#10251e;color:#fff;font-size:.72rem;text-align:center;cursor:pointer}
+.bp-pile:disabled{opacity:.5;cursor:default}
+.bp-melds{min-height:0;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.bp-side{border:1px solid #ffffff30;border-radius:10px;padding:5px;min-width:0;overflow-y:auto}
+.bp-side>strong{font-size:.71rem}
+.bp-meld{display:flex;align-items:center;gap:2px;flex-wrap:wrap;padding:4px 2px;border-bottom:1px solid #ffffff20;cursor:pointer;min-height:35px}
+.bp-meld .mini{padding:3px;border-radius:4px;background:#fff7e8;color:#17241b;border:1px solid #d2c49c;font-size:.66rem;min-width:26px;text-align:center;font-weight:700}
+.bp-meld .mini.red{color:#ac2525}.bp-meld small{font-size:.62rem;color:#f3d28b}
+.bp-hand{display:flex;justify-content:center;align-items:center;gap:3px;min-height:0;overflow:hidden}
+.bp-hand .card{flex:0 1 auto;width:min(8vw,55px);min-width:0;height:clamp(58px,11vh,92px);padding:3px 1px;touch-action:manipulation}
+.bp-hand .card small{font-size:clamp(.46rem,1.1vh,.62rem)}
+.bp-hand .card b{font-size:.8rem}.bp-hand .card .suit{font-size:.85rem}
+.bp-hand .card.selected{outline:3px solid #f1d18e;transform:translateY(-4px)}
+.bp-actions{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.bp-actions button{font-size:clamp(.65rem,1.5vh,.8rem);padding:6px 9px}
+.bp-actions button:disabled{opacity:.35}
+@media(max-height:650px){.bp-board{padding:5px}.bp-player{padding:2px 6px}.bp-hand .card{height:clamp(46px,9vh,76px)}.bp-hand .card small{font-size:.46rem}.bp-hand .card .suit{font-size:.7rem}.bp-meld .mini{font-size:.56rem}}
 </style></head><body><header><div><div class="brand">TAVOLO</div><div class="sub">Giochi di carte italiani</div></div><span class="tag">Mobile first</span></header>
 <main class="wrap"><section id="home"><div class="hero"><h1>Il tavolo è pronto.</h1><p>Briscola con mazzo trevigiano e Burraco. Questa versione include la Briscola contro bot regolabili su quattro livelli.</p></div>
 <h2>Scegli un gioco</h2><div class="grid"><button class="game-option selected" data-game="briscola"><span class="tag">Giocabile</span><strong>Briscola</strong><small>Carte trevigiane · 2–4 giocatori</small></button><button class="game-option burraco" data-game="burraco"><span class="tag">In preparazione</span><strong>Burraco</strong><small>2 oppure 4 giocatori</small></button></div>
 <div class="panel"><h2>Nuova partita</h2><div class="form-grid"><div><label for="nickname">Il tuo nome</label><input id="nickname" maxlength="24" autocomplete="nickname" placeholder="Inserisci nickname"></div><div><label for="count">Numero giocatori</label><select id="count"><option value="2">2 giocatori</option><option value="3">3 giocatori</option><option value="4">4 giocatori</option></select></div><div><label for="difficulty">Difficoltà dei bot</label><select id="difficulty"><option value="easy">Facile</option><option value="medium" selected>Medio</option><option value="hard">Difficile</option><option value="expert">Esperto</option></select></div></div><div class="notice" id="modeNotice">Partita contro bot: gli altri posti sono occupati dal computer. Le partite online con codice e lobby richiederanno il backend.</div><div class="controls"><button id="start">Gioca a Briscola</button><button class="secondary" disabled title="Multiplayer da configurare">Partite online · prossimamente</button></div></div></section>
-<section id="tablePage"><div class="stats"><button id="back" class="secondary">← Lobby</button><div id="round" class="tag"></div><div id="remaining" class="tag"></div></div><div class="panel"><div class="stats"><span id="teams"></span><span class="score" id="score"></span></div><p class="turn" id="status" role="status" aria-live="polite"></p><div class="table"><div class="slot" id="opponents"></div><div class="trick"><div class="tag" id="trump"></div><div class="trickCards" id="trickCards"></div></div><div class="slot"><span class="name" id="self"></span></div></div><h3>Le tue carte</h3><div class="hand" id="hand"></div><div class="controls"><button id="again" class="secondary">Nuova mano</button></div></div></section></main><footer>Progetto open source · <a href="https://github.com/emanuelesordo/card-games">GitHub</a></footer>
+<section id="tablePage"><div class="stats"><button id="back" class="secondary">← Lobby</button><div id="round" class="tag"></div><div id="remaining" class="tag"></div></div><div class="panel"><div class="stats"><span id="teams"></span><span class="score" id="score"></span></div><p class="turn" id="status" role="status" aria-live="polite"></p><div class="table"><div class="slot" id="opponents"></div><div class="trick"><div class="tag" id="trump"></div><div class="trickCards" id="trickCards"></div></div><div class="slot"><span class="name" id="self"></span></div></div><h3>Le tue carte</h3><div class="hand" id="hand"></div><div class="controls"><button id="again" class="secondary">Nuova mano</button></div></div></section><section id="burracoPage"><div class="bp-head"><button id="bpBack" class="secondary">← Lobby</button><span id="bpRound" class="tag"></span><span id="bpScore" class="tag"></span></div><div class="bp-body"><div id="bpStatus" class="bp-status" role="status" aria-live="polite"></div><div class="bp-board"><div id="bpPlayers" class="bp-players"></div><div class="bp-piles"><button id="bpStock" class="bp-pile">Pesca tallone</button><button id="bpDiscard" class="bp-pile">Raccogli scarti</button></div><div class="bp-melds"><div class="bp-side"><strong id="bpOurLabel">Nostri giochi</strong><div id="bpOurs"></div></div><div class="bp-side"><strong id="bpTheirLabel">Avversari</strong><div id="bpTheirs"></div></div></div></div><div id="bpHand" class="bp-hand"></div><div class="bp-actions"><button id="bpLay">Cala selezione</button><button id="bpDiscardBtn" class="secondary">Scarta selezione</button><button id="bpHint" class="secondary">Suggerisci</button><button id="bpSort" class="secondary">Ordina</button></div></div></section></main><footer>Progetto open source · <a href="https://github.com/emanuelesordo/card-games">GitHub</a></footer>
 <script>
 "use strict";
 const SUITS=["denari","coppe","spade","bastoni"],SYMBOLS={denari:"●",coppe:"♥",spade:"⚔",bastoni:"♣"},VALUES=[1,2,3,4,5,6,7,8,9,10],STRENGTH={1:10,3:9,10:8,9:7,8:6,7:5,6:4,5:3,4:2,2:1},POINTS={1:11,3:10,10:4,9:3,8:2,7:0,6:0,5:0,4:0,2:0},NAMES={1:"ASSO",8:"FANTE",9:"CAVALLO",10:"RE"};
 const $=id=>document.getElementById(id);let game="briscola",state=null,timer=null;
-document.querySelectorAll("[data-game]").forEach(button=>button.addEventListener("click",()=>{game=button.dataset.game;document.querySelectorAll("[data-game]").forEach(b=>b.classList.toggle("selected",b===button));$("start").disabled=game!=="briscola";$("start").textContent=game==="briscola"?"Gioca a Briscola":"Burraco in preparazione";$("modeNotice").textContent=game==="briscola"?"Partita locale: gli altri posti sono occupati dal computer. Le partite online con codice e lobby richiederanno il backend.":"Il motore completo del Burraco sarà implementato nella fase successiva: non è ancora giocabile."; }));
+document.querySelectorAll("[data-game]").forEach(button=>button.addEventListener("click",()=>{game=button.dataset.game;document.querySelectorAll("[data-game]").forEach(b=>b.classList.toggle("selected",b===button));$("start").disabled=false;$("start").textContent=game==="briscola"?"Gioca a Briscola":"Gioca a Burraco";$("modeNotice").textContent=game==="briscola"?"Partita locale: gli altri posti sono occupati dal computer. Le partite online con codice e lobby richiederanno il backend.":"Burraco italiano contro bot: pesca, combina, attacca carte ai giochi, usa i pozzetti e chiudi con un burraco."; }));
 function makeDeck(){return SUITS.flatMap(suit=>VALUES.map(value=>({id:suit+"-"+value,suit,value})))}
 function shuffle(items){for(let i=items.length-1;i>0;i--){const a=new Uint32Array(1);crypto.getRandomValues(a);const j=a[0]%(i+1);[items[i],items[j]]=[items[j],items[i]]}return items}
 function strength(card,lead,trump){return(card.suit===trump?200:card.suit===lead?100:0)+STRENGTH[card.value]}
@@ -155,5 +185,216 @@ function aiChoice(hand){
 }
 function scheduleAI(){if(state&&!state.finished&&state.turn!==0&&!state.busy){timer=setTimeout(()=>{if(state&&!state.finished&&state.turn!==0)play(state.turn,aiChoice(state.hands[state.turn]))},500)}}
 function render(){if(!state)return;const s=state,n=($("nickname").value.trim()||"Tu");$("self").textContent=n+" · "+s.hands[0].length+" carte";$("opponents").replaceChildren();for(let p=1;p<s.count;p++){const span=document.createElement("span");span.className="name";span.textContent="CPU "+p+" · "+s.hands[p].length+" carte";$("opponents").append(span)}$("round").textContent="Presa "+Math.min(s.round,Math.floor(40/s.count));$("remaining").textContent=s.deck.length+" carte nel mazzo";$("trump").textContent="Briscola: "+SYMBOLS[s.trump.suit]+" "+s.trump.suit;$("trickCards").replaceChildren();s.trick.forEach(t=>{const box=document.createElement("div");box.style.textAlign="center";box.append(cardEl(t.card));const cap=document.createElement("small");cap.textContent=t.player===0?n:"CPU "+t.player;box.append(cap);$("trickCards").append(box)});$("hand").replaceChildren();s.hands[0].forEach((card,index)=>{const el=cardEl(card,()=>play(0,index));el.disabled=s.turn!==0||s.busy||s.finished;$("hand").append(el)});$("score").textContent=s.scores.join(" · ");$("teams").textContent=s.count===4?"Squadre: tu + CPU 2 / CPU 1 + CPU 3":"Punti per giocatore (tu, CPU)";if(s.finished){const max=Math.max(...s.scores),w=s.scores.map((v,i)=>v===max?i:-1).filter(v=>v>=0);$("status").textContent="Partita terminata · "+(w.length>1?"Pareggio":w[0]===group(0)?"Hai vinto!":"Ha vinto "+(s.count===4?"la squadra avversaria":"CPU "+w[0]))+" · Totale "+s.scores.reduce((a,b)=>a+b,0)+"/120 punti"}else $("status").textContent=s.busy?"Assegnazione della presa…":s.turn===0?"È il tuo turno: scegli una carta.":"Sta giocando CPU "+s.turn+"…"}
-$("start").addEventListener("click",startGame);$("again").addEventListener("click",startGame);$("back").addEventListener("click",()=>{clearTimeout(timer);state=null;$("home").classList.remove("hidden");$("tablePage").style.display="none"});$("nickname").value=localStorage.getItem("tavolo-nickname")||"";$("nickname").addEventListener("change",e=>localStorage.setItem("tavolo-nickname",e.target.value.trim().slice(0,24)));
+$("start").addEventListener("click",()=>game==="burraco"?bStart():startGame());$("again").addEventListener("click",startGame);$("back").addEventListener("click",()=>{clearTimeout(timer);state=null;$("home").classList.remove("hidden");$("tablePage").style.display="none"});$("nickname").value=localStorage.getItem("tavolo-nickname")||"";$("nickname").addEventListener("change",e=>localStorage.setItem("tavolo-nickname",e.target.value.trim().slice(0,24)));
+
+/* BURRACO: engine independent from Briscola. All cards and bot decisions remain local. */
+const B_SUITS=["♣","♦","♥","♠"],B_RANKS=[1,2,3,4,5,6,7,8,9,10,11,12,13];
+let B=null,bTimer=null,bSelection=new Set();
+const bTeam=p=>B.count===4?p%2:p;
+const bWild=c=>c.joker||c.rank===2;
+const bValue=c=>c.joker?30:c.rank===2?20:c.rank===1?15:c.rank>=8?10:5;
+const bName=c=>c.joker?"J":({1:"A",11:"J",12:"Q",13:"K"}[c.rank]||String(c.rank))+c.suit;
+function bDeck(){let cards=[];for(let deck=0;deck<2;deck++){for(let suit of B_SUITS)for(let rank of B_RANKS)cards.push({id:deck+"-"+suit+"-"+rank,suit,rank,joker:false});for(let j=0;j<2;j++)cards.push({id:deck+"-joker-"+j,suit:"★",rank:0,joker:true})}return shuffle(cards)}
+function bMeldType(cards){
+ if(cards.length<3)return null;
+ // Sets: 3-8 natural matching ranks, at most one wildcard, no duplicate physical identity.
+ if(new Set(cards.map(c=>c.id)).size!==cards.length)return null;
+ const natural=cards.filter(c=>!bWild(c));
+ if(natural.length>=2&&natural.every(c=>c.rank===natural[0].rank)&&cards.length<=8&&cards.length-natural.length<=1)return {type:"set",wild:cards.length-natural.length,run:natural.length};
+ // Runs: one optional wildcard (joker or pinella). A 2 of the run suit can be natural.
+ for(const suit of B_SUITS)for(let aceHigh of [false,true]){
+  const opts=[...cards.filter(c=>!c.joker&&c.suit===suit&&c.rank!==2)];
+  const foreign=cards.filter(c=>c.joker||c.suit!==suit||c.rank===2);
+  const localTwo=cards.filter(c=>!c.joker&&c.suit===suit&&c.rank===2);
+  const candidates=[false,true];
+  for(const useNaturalTwo of candidates){
+   if(useNaturalTwo&&localTwo.length!==1)continue;
+   const values=opts.map(c=>c.rank===1?(aceHigh?14:1):c.rank);
+   if(useNaturalTwo)values.push(2);
+   const wildcardCount=cards.length-values.length;
+   if(wildcardCount>1||wildcardCount<0)continue;
+   if(new Set(values).size!==values.length)continue;
+   if(!values.length)continue;
+   const low=Math.min(...values),high=Math.max(...values);
+   if(low<1||high>14)continue;
+   if(high-low+1>cards.length)continue;
+   if(wildcardCount===0&&high-low+1!==cards.length)continue;
+   // Wildcard may be at either edge, or fill exactly one hole.
+   let valid=false;
+   for(let start=Math.max(1,high-cards.length+1);start<=Math.min(low,15-cards.length);start++){
+     if(values.every(v=>v>=start&&v<start+cards.length)){valid=true;break}
+   }
+   if(valid){const sorted=[...values].sort((a,b)=>a-b);let consecutive=1,best=1;for(let k=1;k<sorted.length;k++){consecutive=sorted[k]===sorted[k-1]+1?consecutive+1:1;best=Math.max(best,consecutive)}
+    return {type:"run",suit,wild:wildcardCount,run:best};}
+  }
+ }
+ return null;
+}
+function bBonus(cards){
+ const t=bMeldType(cards);if(!t||cards.length<7)return 0;
+ if(t.wild===0)return 200;
+ if(t.type==="set"?cards.length>=8:t.run>=7)return 150;
+ return 100;
+}
+function bStateScore(team,closed=false){
+ const meld=B.melds[team].flatMap(m=>m.cards);
+ let score=meld.reduce((n,c)=>n+bValue(c),0)+B.melds[team].reduce((n,m)=>n+bBonus(m.cards),0);
+ score-=B.hands.reduce((n,hand,p)=>n+(bTeam(p)===team?hand.reduce((sum,c)=>sum+bValue(c),0):0),0);
+ if(!B.taken[team])score-=100;
+ if(closed)score+=100;
+ return score;
+}
+function bStart(){
+ clearTimeout(timer);clearTimeout(bTimer);let count=Number($("count").value);
+ if(count!==2&&count!==4)count=2;
+ let deck=bDeck(),hands=Array.from({length:count},()=>[]),pockets=[[],[]];
+ for(let j=0;j<11;j++)for(let p=0;p<count;p++)hands[p].push(deck.pop());
+ for(let j=0;j<11;j++)for(let k=0;k<2;k++)pockets[k].push(deck.pop());
+ const discard=[deck.pop()];
+ B={count,deck,hands,pockets,discard,melds:[[],[]],taken:[false,false],turn:0,drawn:false,round:1,finished:false,score:null,difficulty:$("difficulty").value,message:"Pesca dal tallone oppure raccogli gli scarti."};
+ bSelection.clear();$("home").classList.add("hidden");$("tablePage").style.display="none";$("burracoPage").classList.add("active");bRender();
+}
+function bCanPlay(){return B&&!B.finished&&B.turn===0}
+function bDraw(takeDiscard=false){
+ if(!B||B.finished||B.drawn)return false;
+ if(takeDiscard){if(!B.discard.length)return false;B.hands[B.turn].push(...B.discard.splice(0))}
+ else {if(!B.deck.length)return false;B.hands[B.turn].push(B.deck.pop())}
+ B.drawn=true;B.message="Puoi calare combinazioni o scartare una carta.";bRender();return true;
+}
+function bLay(player,indices,target=null){
+ if(!B||B.finished||!B.drawn||B.turn!==player)return false;
+ const hand=B.hands[player],ids=[...new Set(indices)].sort((a,b)=>a-b);
+ if(!ids.length||ids.some(i=>i<0||i>=hand.length))return false;
+ const cards=ids.map(i=>hand[i]),team=bTeam(player);
+ let meld=target===null?null:B.melds[team][target];
+ if(target!==null&&!meld)return false;
+ const combined=meld?meld.cards.concat(cards):cards;
+ if(!bMeldType(combined))return false;
+ if(meld)meld.cards=combined;else B.melds[team].push({cards:combined});
+ for(let i of ids.slice().reverse())hand.splice(i,1);
+ bSelection.clear();B.message=cards.length+" carta/e calata/e.";
+ bEmptyHand(player,false);bRender();return true;
+}
+function bEmptyHand(player,fromDiscard){
+ if(B.hands[player].length!==0)return;
+ const team=bTeam(player);
+ if(!B.taken[team]){
+   B.taken[team]=true;const pocket=B.pockets.shift()||[];
+   B.hands[player].push(...pocket);
+   // Empty hand after laying melds: pocket on the fly, play continues.
+   // Empty hand after discarding: next player takes their turn.
+   B.message="Pozzetto preso "+(fromDiscard?"con scarto.":"al volo.")+"";
+   return;
+ }
+ if(!fromDiscard){B.message="Per chiudere devi scartare un'ultima carta.";return}
+ if(!B.melds[team].some(m=>bBonus(m.cards)>0)){B.message="Chiusura non valida: serve almeno un Burraco.";return}
+ B.finished=true;B.score=[bStateScore(0,team===0),bStateScore(1,team===1)];
+ B.message="Mano conclusa! "+(B.score[0]===B.score[1]?"Pareggio.":(B.score[0]>B.score[1]?"Hai vinto!":"Vincono gli avversari."));
+}
+function bDiscard(player,index){
+ if(!B||B.finished||!B.drawn||B.turn!==player)return false;
+ const hand=B.hands[player];if(index<0||index>=hand.length)return false;
+ const card=hand[index],team=bTeam(player),wouldClose=hand.length===1&&B.taken[team];
+ if(wouldClose&&(bWild(card)||!B.melds[team].some(m=>bBonus(m.cards)>0)))return false;
+ hand.splice(index,1);B.discard.push(card);B.drawn=false;bSelection.clear();
+ bEmptyHand(player,true);
+ if(!B.finished){B.turn=(B.turn+1)%B.count;B.round++;B.message="Turno di "+(B.turn===0?"te":"CPU "+B.turn)+".";}
+ bRender();bSchedule();return true;
+}
+function bFindMeld(hand){
+ const len=hand.length,combos=[];
+ // Efficient bounded search of 3-card candidates; then extend greedily.
+ for(let i=0;i<len;i++)for(let j=i+1;j<len;j++)for(let k=j+1;k<len;k++){
+ const type=bMeldType([hand[i],hand[j],hand[k]]);if(type)combos.push([i,j,k]);
+ }
+ if(!combos.length)return null;
+ const options=combos.map(base=>{
+   let cards=base.map(i=>hand[i]),indices=[...base];
+   let added=true;while(added){added=false;for(let i=0;i<len;i++)if(!indices.includes(i)&&bMeldType(cards.concat(hand[i]))){cards.push(hand[i]);indices.push(i);added=true;break}}
+   return {indices,score:cards.reduce((s,c)=>s+bValue(c),0)+bBonus(cards)};
+ });
+ options.sort((a,b)=>bValue(hand[a.indices[0]])-bValue(hand[b.indices[0]])||b.score-a.score);
+ return options[0].indices;
+}
+function bBot(){
+ if(!B||B.finished||B.turn===0)return;
+ const player=B.turn,team=bTeam(player),hand=B.hands[player],mode=B.difficulty;
+ if(!B.drawn){
+   // Choose discard pile when it contributes an immediately usable meld.
+   const pile=B.discard,shouldTake=pile.length&&pile.length<=7&&mode!=="easy"&&!!bFindMeld(hand.concat(pile));
+   bDraw(!!shouldTake);
+ }
+ let attempts=0;
+ while(attempts++<35&&!B.finished&&B.turn===player){
+   let best=null,bestIndex=null,bestVal=-Infinity;
+   for(let i=0;i<B.melds[team].length;i++){
+    const meld=B.melds[team][i];for(let k=0;k<B.hands[player].length;k++){
+      const c=B.hands[player][k];if(bMeldType(meld.cards.concat(c))){
+        const score=bValue(c)+(bBonus(meld.cards.concat(c))-bBonus(meld.cards));
+        if(score>bestVal){bestVal=score;bestIndex=k;best=i}
+      }
+    }
+   }
+   if(best!==null&&bLay(player,[bestIndex],best))continue;
+   const found=bFindMeld(B.hands[player]);
+   if(found&&bLay(player,found))continue;
+   break;
+ }
+ if(B.finished)return;
+ let ix=0;
+ if(mode==="easy")ix=Math.floor(Math.random()*B.hands[player].length);
+ else{
+   const inUsefulPair=c=>B.hands[player].some(d=>d!==c&&!bWild(c)&&!bWild(d)&&(c.rank===d.rank||(c.suit===d.suit&&Math.abs(c.rank-d.rank)<=2)));
+   const ranked=B.hands[player].map((c,i)=>({i,c,score:bValue(c)+(bWild(c)?-50:0)+(inUsefulPair(c)?-20:0)})).sort((a,b)=>a.score-b.score);
+   ix=(mode==="medium"?ranked[Math.min(1,ranked.length-1)]:ranked[0]).i;
+ }
+ const valid=B.hands[player].map((c,i)=>({c,i})).filter(x=>!(B.hands[player].length===1&&B.taken[team]&&(bWild(x.c)||!B.melds[team].some(m=>bBonus(m.cards)))));
+ if(valid.length&&!valid.some(x=>x.i===ix))ix=valid[0].i;
+ if(!bDiscard(player,ix)){const safe=valid.find(x=>bDiscard(player,x.i));if(!safe){B.message="CPU non può chiudere: turno passato.";B.drawn=false;B.turn=(B.turn+1)%B.count;B.round++;bRender();bSchedule()}}
+}
+function bSchedule(){clearTimeout(bTimer);if(!B||B.finished||B.turn===0)return;bTimer=setTimeout(bBot,550)}
+function bCardElement(c,index){
+ const button=document.createElement("button");button.className="card "+(c.suit==="♦"?"denari":c.suit==="♥"?"coppe":c.suit==="♠"?"spade":"bastoni")+(bSelection.has(c.id)?" selected":"");
+ button.innerHTML="<small>"+(c.joker?"JOKER":c.rank===1?"ASSO":c.rank===11?"J":c.rank===12?"Q":c.rank===13?"K":c.rank)+"</small><span class='suit'>"+c.suit+"</span><b>"+(c.joker?"★":c.rank)+"</b>";
+ button.disabled=!bCanPlay()||!B.drawn;
+ button.setAttribute("aria-pressed",String(bSelection.has(c.id)));
+ button.onclick=()=>{if(bSelection.has(c.id))bSelection.delete(c.id);else bSelection.add(c.id);bRender()};
+ return button;
+}
+function bRender(){
+ if(!B)return;
+ const mine=bTeam(0),enemy=1-mine;
+ $("bpRound").textContent="Turno "+B.round;
+ $("bpScore").textContent="Punti: "+bStateScore(mine)+" / "+bStateScore(enemy);
+ $("bpStatus").textContent=B.message;
+ const players=$("bpPlayers");players.replaceChildren();
+ for(let i=0;i<B.count;i++){const el=document.createElement("span");el.className="bp-player"+(B.turn===i?" turn-now":"");el.textContent=(i===0?($("nickname").value.trim()||"Tu"):"CPU "+i)+" · "+B.hands[i].length+" carte";players.append(el)}
+ $("bpStock").textContent="TALLONE · "+B.deck.length;
+ $("bpDiscard").textContent="SCARTI · "+B.discard.length+" · "+(B.discard.length?bName(B.discard[B.discard.length-1]):"—");
+ $("bpStock").disabled=!bCanPlay()||B.drawn||!B.deck.length;
+ $("bpDiscard").disabled=!bCanPlay()||B.drawn||!B.discard.length;
+ $("bpOurLabel").textContent="I nostri giochi"+(B.taken[mine]?" · pozzetto ✓":" · pozzetto da prendere");
+ $("bpTheirLabel").textContent="Avversari"+(B.taken[enemy]?" · pozzetto ✓":"");
+ function fill(id,team){const el=$(id);el.replaceChildren();for(let idx=0;idx<B.melds[team].length;idx++){
+  const meld=B.melds[team][idx],line=document.createElement("div");line.className="bp-meld";
+  line.title=team===mine?"Seleziona carte e tocca qui per aggiungerle al gioco":"Combinazione avversaria";
+  for(let card of meld.cards){const s=document.createElement("span");s.className="mini"+(["♥","♦"].includes(card.suit)?" red":"");s.textContent=bName(card);line.append(s)}
+  if(bBonus(meld.cards)){const b=document.createElement("small");b.textContent="+"+bBonus(meld.cards);line.append(b)}
+  if(team===mine)line.onclick=()=>{const indices=B.hands[0].map((c,i)=>bSelection.has(c.id)?i:-1).filter(i=>i>=0);if(!bLay(0,indices,idx))B.message="Carte incompatibili con questo gioco.";bRender()};
+  el.append(line)
+ }}
+ fill("bpOurs",mine);fill("bpTheirs",enemy);
+ const hand=$("bpHand");hand.replaceChildren();B.hands[0].forEach((c,i)=>hand.append(bCardElement(c,i)));
+ const selected=B.hands[0].map((c,i)=>bSelection.has(c.id)?i:-1).filter(i=>i>=0);
+ $("bpLay").disabled=!bCanPlay()||!B.drawn||selected.length<1;
+ $("bpDiscardBtn").disabled=!bCanPlay()||!B.drawn||selected.length!==1;
+ $("bpHint").disabled=!bCanPlay()||!B.drawn;
+}
+$("bpStock").addEventListener("click",()=>bCanPlay()&&bDraw(false));
+$("bpDiscard").addEventListener("click",()=>bCanPlay()&&bDraw(true));
+$("bpLay").addEventListener("click",()=>{if(!bCanPlay())return;const ids=B.hands[0].map((c,i)=>bSelection.has(c.id)?i:-1).filter(i=>i>=0);if(!bLay(0,ids)){B.message="Seleziona almeno 3 carte in scala dello stesso seme o dello stesso valore, con al massimo una matta, oppure tocca un gioco già calato per aggiungervi carte.";bRender()}});
+$("bpDiscardBtn").addEventListener("click",()=>{if(!bCanPlay())return;const ids=B.hands[0].map((c,i)=>bSelection.has(c.id)?i:-1).filter(i=>i>=0);if(ids.length!==1||!bDiscard(0,ids[0])){B.message="Scegli una carta da scartare. Per chiudere servono pozzetto e Burraco e non puoi scartare una matta.";bRender()}});
+$("bpHint").addEventListener("click",()=>{if(!bCanPlay())return;const choices=bFindMeld(B.hands[0]);bSelection.clear();if(choices){choices.forEach(i=>bSelection.add(B.hands[0][i].id));B.message="Suggerimento: puoi calare le carte evidenziate."}else B.message="Nessuna nuova combinazione evidente; prova ad attaccare carte ai giochi già aperti.";bRender()});
+$("bpSort").addEventListener("click",()=>{if(!B)return;B.hands[0].sort((a,b)=>a.suit.localeCompare(b.suit)||a.rank-b.rank);bRender()});
+$("bpBack").addEventListener("click",()=>{clearTimeout(bTimer);B=null;bSelection.clear();$("burracoPage").classList.remove("active");$("home").classList.remove("hidden")});
 </script></body></html>
