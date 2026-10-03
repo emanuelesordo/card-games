@@ -98,7 +98,7 @@ footer{display:none}
 #tablePage .card .suit.pip-face span:last-child:nth-child(odd){grid-column:1/-1}
 #tablePage .card .suit.figure-face{display:flex;align-items:center;justify-content:center;font-size:clamp(1.35rem,4vh,2.4rem)}
 #tablePage .card .suit.ace-face{display:flex;align-items:center;justify-content:center;font-size:clamp(1.7rem,5vh,3rem)}
-</style></head><body><header><div><div class="brand">TAVOLO</div><div class="sub">Giochi di carte italiani</div></div><span class="tag">Mobile first</span></header>
+#tablePage .card .suit.figure-face{display:flex;flex-direction:column;gap:0;align-items:center;justify-content:center;line-height:1;font-size:clamp(1.05rem,3vh,1.8rem)}#tablePage .card .suit.figure-face .figure-suit{font-size:clamp(.78rem,2.2vh,1.3rem)}#tablePage .card .suit.ace-face{font-size:clamp(1.9rem,5.8vh,3.5rem)}</style></head><body><header><div><div class="brand">TAVOLO</div><div class="sub">Giochi di carte italiani</div></div><span class="tag">Mobile first</span></header>
 <main class="wrap"><section id="home"><div class="hero"><h1>Il tavolo è pronto.</h1><p>Briscola con mazzo trevigiano e Burraco. Gioca contro il computer a Briscola o Burraco, con quattro livelli di difficoltà.</p></div>
 <h2>Scegli un gioco</h2><div class="grid"><button class="game-option selected" data-game="briscola"><span class="tag">Giocabile</span><strong>Briscola</strong><small>Carte trevigiane · 2–4 giocatori</small></button><button class="game-option burraco" data-game="burraco"><span class="tag">Giocabile</span><strong>Burraco</strong><small>2 oppure 4 giocatori</small></button></div>
 <div class="panel"><h2>Nuova partita</h2><div class="form-grid"><div><label for="nickname">Il tuo nome</label><input id="nickname" maxlength="24" autocomplete="nickname" placeholder="Inserisci nickname"></div><div><label for="count">Numero giocatori</label><select id="count"><option value="2">2 giocatori</option><option value="3">3 giocatori</option><option value="4">4 giocatori</option></select></div><div><label for="difficulty">Difficoltà dei bot</label><select id="difficulty"><option value="easy">Facile</option><option value="medium" selected>Medio</option><option value="hard">Difficile</option><option value="expert">Esperto</option></select></div></div><div class="notice" id="modeNotice">Modalità single-player: giochi contro il computer.</div><div class="controls"><button id="start">Gioca a Briscola</button></div></div></section>
@@ -123,7 +123,7 @@ function cardEl(card,click){
  element.className="card "+card.suit+" "+(card.value===1?"ace-card":card.value>=8?"figure-card":"pip-card");
  const suit=SYMBOLS[card.suit];
  const figures={8:"🏇",9:"🐴",10:"🤴"};
- const face=card.value===1?suit:(figures[card.value]||Array(card.value).fill(suit).map(x=>"<span>"+x+"</span>").join(""));
+ const face=card.value===1?suit:(figures[card.value]?figures[card.value]+"<span class=\'figure-suit\'>"+suit+"</span>":Array(card.value).fill(suit).map(x=>"<span>"+x+"</span>").join(""));
  element.innerHTML="<small>"+(NAMES[card.value]||card.value)+"</small><span class='suit "+(card.value===1?"ace-face":card.value>=8?"figure-face":"pip-face")+"'>"+face+"</span><b>"+card.value+"</b>";
  if(click)element.addEventListener("click",click);
  return element;
