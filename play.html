@@ -289,8 +289,9 @@ function bStart(){
  for(let j=0;j<11;j++)for(let p=0;p<count;p++)hands[p].push(deck.pop());
  for(let j=0;j<11;j++)for(let k=0;k<2;k++)pockets[k].push(deck.pop());
  const discard=[deck.pop()];
- B={count,deck,hands,pockets,discard,melds:[[],[]],taken:[false,false],turn:0,drawn:false,round:1,finished:false,score:null,difficulty:$("difficulty").value,message:"Pesca dal tallone oppure raccogli gli scarti."};
- bSelection.clear();$("home").classList.add("hidden");$("tablePage").style.display="none";$("burracoPage").classList.add("active");bRender();
+ const firstPlayer=crypto.getRandomValues(new Uint32Array(1))[0]%count;
+ B={count,deck,hands,pockets,discard,melds:[[],[]],taken:[false,false],turn:firstPlayer,drawn:false,round:1,finished:false,score:null,difficulty:$("difficulty").value,message:firstPlayer===0?"Inizi tu: pesca dal tallone oppure raccogli gli scarti.":"Inizia CPU "+firstPlayer+"."};
+ bSelection.clear();$("home").classList.add("hidden");$("tablePage").style.display="none";$("burracoPage").classList.add("active");bRender();bSchedule();
 }
 function bCanPlay(){return B&&!B.finished&&B.turn===0}
 function bDraw(takeDiscard=false){
