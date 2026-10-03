@@ -1,1 +1,110 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#102920"><title>Tavolo — Giochi di carte</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#f5f4ed;background:#0c1c18;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 50% 5%,#214b3c,#102820 60%,#091713)}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:750;background:#e5c887;color:#18251c}button:disabled{opacity:.45;cursor:not-allowed}button.secondary{background:#ffffff18;color:#f5f4ed;border:1px solid #ffffff29}button.selected{outline:2px solid #e5c887}header{padding:18px max(18px,env(safe-area-inset-left));display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff18}.brand{letter-spacing:.19em;font-size:1.15rem;color:#e9d29d;font-weight:900}.sub{color:#bfd1c6;font-size:.85rem}.wrap{width:min(100%,960px);margin:auto;padding:20px 16px 40px}.hero{margin:18px 0 24px}.hero h1{font-size:clamp(2rem,6vw,3.4rem);letter-spacing:-.05em;line-height:1.05;margin:0 0 12px}.hero p{max-width:550px;color:#c7d7cd;line-height:1.5}.panel{background:#ffffff0b;border:1px solid #ffffff20;border-radius:20px;padding:20px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.game-option{text-align:left;min-height:170px;display:flex;flex-direction:column;justify-content:end;background:linear-gradient(145deg,#27543f,#142e27);border:1px solid #ffffff22;color:white;position:relative;overflow:hidden}.game-option.burraco{background:linear-gradient(145deg,#64502b,#243528)}.game-option strong{font-size:1.4rem}.game-option small{margin-top:5px;font-weight:400;color:#dce9de}.tag{display:inline-block;background:#132d26;border:1px solid #b4c3b43d;padding:4px 9px;border-radius:50px;font-size:.72rem;color:#e0dab7}.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}label{display:block;font-size:.82rem;color:#c4d6ca;margin-bottom:5px}input,select{min-width:0;max-width:100%;width:100%;color:#fff;background:#071c17;border:1px solid #667e6d;border-radius:10px;padding:12px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.muted{color:#b7c9bf}.notice{border-left:3px solid #e5c887;padding:10px 12px;background:#e5c88712;margin:14px 0;line-height:1.5}#tablePage{display:none}.table{border:2px solid #ffffff22;border-radius:40px;background:radial-gradient(ellipse,#276248,#12432f);min-height:390px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;box-shadow:inset 0 0 50px #0005}.slot{display:flex;align-items:center;justify-content:center;gap:8px;min-height:78px}.slot .name{font-size:.85rem;background:#071d18bb;padding:7px 11px;border-radius:40px}.trick{display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:center;min-height:150px}.trickCards{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}.card{width:clamp(54px,16vw,87px);height:clamp(85px,24vw,132px);border-radius:9px;border:2px solid #e4d8bd;background:#fffaf0;color:#1f261f;display:flex;align-items:center;justify-content:space-between;flex-direction:column;padding:8px 3px;box-shadow:0 4px 8px #0005;position:relative;transition:transform .15s}.card b{font-size:1.3rem}.card small{font-weight:800;letter-spacing:.01em}.card .suit{font-size:1.25rem}.card.denari{color:#b48400}.card.coppe{color:#b42e24}.card.spade{color:#4a6c80}.card.bastoni{color:#267046}.hand{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:14px 0}.hand .card:hover:not(:disabled){transform:translateY(-7px)}.hand .card:disabled{opacity:.55}.stats{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.87rem}.score{font-size:1.25rem;font-weight:800;color:#e9d29d}.turn{color:#f3dca0;min-height:24px}.hidden{display:none!important}footer{text-align:center;padding:30px 15px;color:#9fb7a9;font-size:.8rem}a{color:#e7d19f}@media(max-width:560px){.grid{grid-template-columns:1fr 1fr}.game-option{min-height:145px;padding:14px}.game-option strong{font-size:1.15rem}.form-grid{grid-template-columns:1fr}.panel{padding:16px}.table{border-radius:25px;min-height:350px;padding:9px}.card{padding:5px 2px}.hand{gap:5px}.wrap{padding:13px 12px 30px}}
+</style></head><body><header><div><div class="brand">TAVOLO</div><div class="sub">Giochi di carte italiani</div></div><span class="tag">Mobile first</span></header>
+<main class="wrap"><section id="home"><div class="hero"><h1>Il tavolo è pronto.</h1><p>Briscola con mazzo trevigiano e Burraco. Questa versione include la Briscola contro bot regolabili su quattro livelli.</p></div>
+<h2>Scegli un gioco</h2><div class="grid"><button class="game-option selected" data-game="briscola"><span class="tag">Giocabile</span><strong>Briscola</strong><small>Carte trevigiane · 2–4 giocatori</small></button><button class="game-option burraco" data-game="burraco"><span class="tag">In preparazione</span><strong>Burraco</strong><small>2 oppure 4 giocatori</small></button></div>
+<div class="panel"><h2>Nuova partita</h2><div class="form-grid"><div><label for="nickname">Il tuo nome</label><input id="nickname" maxlength="24" autocomplete="nickname" placeholder="Inserisci nickname"></div><div><label for="count">Numero giocatori</label><select id="count"><option value="2">2 giocatori</option><option value="3">3 giocatori</option><option value="4">4 giocatori</option></select></div><div><label for="difficulty">Difficoltà dei bot</label><select id="difficulty"><option value="easy">Facile</option><option value="medium" selected>Medio</option><option value="hard">Difficile</option><option value="expert">Esperto</option></select></div></div><div class="notice" id="modeNotice">Partita contro bot: gli altri posti sono occupati dal computer. Le partite online con codice e lobby richiederanno il backend.</div><div class="controls"><button id="start">Gioca a Briscola</button><button class="secondary" disabled title="Multiplayer da configurare">Partite online · prossimamente</button></div></div></section>
+<section id="tablePage"><div class="stats"><button id="back" class="secondary">← Lobby</button><div id="round" class="tag"></div><div id="remaining" class="tag"></div></div><div class="panel"><div class="stats"><span id="teams"></span><span class="score" id="score"></span></div><p class="turn" id="status" role="status" aria-live="polite"></p><div class="table"><div class="slot" id="opponents"></div><div class="trick"><div class="tag" id="trump"></div><div class="trickCards" id="trickCards"></div></div><div class="slot"><span class="name" id="self"></span></div></div><h3>Le tue carte</h3><div class="hand" id="hand"></div><div class="controls"><button id="again" class="secondary">Nuova mano</button></div></div></section></main><footer>Progetto open source · <a href="https://github.com/emanuelesordo/card-games">GitHub</a></footer>
+<script>
+"use strict";
+const SUITS=["denari","coppe","spade","bastoni"],SYMBOLS={denari:"●",coppe:"♥",spade:"⚔",bastoni:"♣"},VALUES=[1,2,3,4,5,6,7,8,9,10],STRENGTH={1:10,3:9,10:8,9:7,8:6,7:5,6:4,5:3,4:2,2:1},POINTS={1:11,3:10,10:4,9:3,8:2,7:0,6:0,5:0,4:0,2:0},NAMES={1:"ASSO",8:"FANTE",9:"CAVALLO",10:"RE"};
+const $=id=>document.getElementById(id);let game="briscola",state=null,timer=null;
+document.querySelectorAll("[data-game]").forEach(button=>button.addEventListener("click",()=>{game=button.dataset.game;document.querySelectorAll("[data-game]").forEach(b=>b.classList.toggle("selected",b===button));$("start").disabled=game!=="briscola";$("start").textContent=game==="briscola"?"Gioca a Briscola":"Burraco in preparazione";$("modeNotice").textContent=game==="briscola"?"Partita locale: gli altri posti sono occupati dal computer. Le partite online con codice e lobby richiederanno il backend.":"Il motore completo del Burraco sarà implementato nella fase successiva: non è ancora giocabile."; }));
+function makeDeck(){return SUITS.flatMap(suit=>VALUES.map(value=>({id:suit+"-"+value,suit,value})))}
+function shuffle(items){for(let i=items.length-1;i>0;i--){const a=new Uint32Array(1);crypto.getRandomValues(a);const j=a[0]%(i+1);[items[i],items[j]]=[items[j],items[i]]}return items}
+function strength(card,lead,trump){return(card.suit===trump?200:card.suit===lead?100:0)+STRENGTH[card.value]}
+function winner(trick,trump){const lead=trick[0].card.suit;return trick.reduce((best,t)=>strength(t.card,lead,trump)>strength(best.card,lead,trump)?t:best,trick[0]).player}
+function cardEl(card,click){const b=document.createElement(click?"button":"div");b.className="card "+card.suit;b.innerHTML="<small>"+(NAMES[card.value]||card.value)+"</small><span class='suit'>"+SYMBOLS[card.suit]+"</span><b>"+card.value+"</b>";if(click)b.addEventListener("click",click);return b}
+function group(player){return state.count===4?player%2:player}
+function startGame(){clearTimeout(timer);const count=Number($("count").value);let deck=makeDeck();if(count===3)deck=deck.filter(c=>c.id!=="denari-2");shuffle(deck);let hands=Array.from({length:count},()=>[]);for(let i=0;i<3;i++)for(let p=0;p<count;p++)hands[p].push(deck.pop());const trump=deck[0];state={count,deck,hands,trump,trick:[],leader:0,turn:0,round:1,difficulty:$("difficulty").value,history:[],scores:Array.from({length:count===4?2:count},()=>0),finished:false,busy:false};$("home").classList.add("hidden");$("tablePage").style.display="block";render()}
+function draw(){if(!state.deck.length)return;for(let i=0;i<state.count;i++){let p=(state.leader+i)%state.count;if(state.deck.length)state.hands[p].push(state.deck.pop())}}
+function play(p,index){if(!state||state.finished||state.turn!==p||state.busy)return;const card=state.hands[p].splice(index,1)[0];if(!card)return;state.trick.push({player:p,card});state.history.push({player:p,card,round:state.round});if(state.trick.length===state.count){state.busy=true;render();timer=setTimeout(resolve,950);return}state.turn=(p+1)%state.count;render();scheduleAI()}
+function resolve(){if(!state)return;const win=winner(state.trick,state.trump.suit);const pts=state.trick.reduce((sum,t)=>sum+POINTS[t.card.value],0);state.scores[group(win)]+=pts;state.leader=win;state.turn=win;state.trick=[];state.busy=false;draw();state.round++;if(state.hands.every(h=>h.length===0)&&state.deck.length===0)state.finished=true;render();scheduleAI()}
+function aiChoice(hand){
+ const s=state,mode=s.difficulty;
+ const random=()=>Math.floor(Math.random()*hand.length);
+ if(mode==="easy")return random();
+ const lead=s.trick[0]?.card.suit||null, trump=s.trump.suit;
+ const current=s.trick.length? s.trick.reduce((b,t)=>strength(t.card,lead,trump)>strength(b.card,lead,trump)?t:b,s.trick[0]):null;
+ const partnerWinning=s.count===4&&current&&group(current.player)===group(s.turn);
+ const pointsOnTable=s.trick.reduce((n,t)=>n+POINTS[t.card.value],0);
 
+ 
+ const winning=(c,opponent)=>{if(!opponent)return true;return strength(c,lead,trump)>strength(opponent.card,lead,trump)};
+ // Medium: avoids burning high-value cards and chooses the cheapest sufficient winner.
+ function baseline(){if(!current){
+  return hand.map((c,i)=>({i,score:POINTS[c.value]*2+(c.suit===trump?7:0)+STRENGTH[c.value]*.35})).sort((a,b)=>a.score-b.score)[0].i;
+ }
+ if(partnerWinning){
+  if(s.trick.length===s.count-1)return hand.reduce((b,c,i)=>POINTS[c.value]>POINTS[hand[b].value]?i:b,0);
+  return hand.reduce((b,c,i)=>POINTS[c.value]<POINTS[hand[b].value]?i:b,0);
+ }
+ const wins=hand.map((c,i)=>({c,i})).filter(x=>winning(x.c,current));
+ if(wins.length){
+  wins.sort((a,b)=>(a.c.suit===trump?30:0)+STRENGTH[a.c.value]+POINTS[a.c.value]*1.5-((b.c.suit===trump?30:0)+STRENGTH[b.c.value]+POINTS[b.c.value]*1.5));
+  return wins[0].i;
+ }
+ return hand.map((c,i)=>({i,score:POINTS[c.value]*2+(c.suit===trump?12:0)+STRENGTH[c.value]*.2})).sort((a,b)=>a.score-b.score)[0].i;
+ }
+ if(mode==="medium")return baseline();
+ // Hard: evaluates captured points, trump conservation and opponents still to play.
+ function evaluate(card){
+   const my={player:s.turn,card},test=s.trick.concat(my),winningPlayer=winner(test,trump);
+   const taken=pointsOnTable+POINTS[card.value],canWin=winningPlayer===s.turn;
+   const friendly=group(winningPlayer)===group(s.turn);
+   let score=(friendly?taken*1.4:-taken*.55);
+   if(card.suit===trump)score-=12+STRENGTH[card.value]*1.45;
+   score-=POINTS[card.value]*.7;
+   if(canWin)score+=2;
+   // Using an ace or three late in the trick is worthwhile for a valuable pot.
+   if(canWin&&s.trick.length===s.count-1)score+=taken*.65;
+   if(!s.trick.length&&card.suit===trump)score-=12;
+   if(!s.trick.length&&card.value===1)score-=10;
+   if(!s.trick.length&&card.value===3)score-=6;
+   return score;
+ }
+ if(mode==="hard"){let best=0;for(let i=1;i<hand.length;i++)if(evaluate(hand[i])>evaluate(hand[best]))best=i;return best}
+ // Expert: deterministic hidden-information sampling with hand-aware opponent estimates.
+ // Never accesses opponents' hands or the undealt deck.
+ const known=new Set(s.history.map(x=>x.card.id));hand.forEach(c=>known.add(c.id));
+ const pool=makeDeck().filter(c=>!(s.count===3&&c.id==="denari-2")&&!known.has(c.id));
+ // The face-up trump is public information; its suit is already taken into account.
+ const following=s.count-1-s.trick.length;
+ function outcome(candidate){
+   const simulated=s.trick.concat({player:s.turn,card:candidate});
+   if(!following){const w=winner(simulated,trump);const pts=simulated.reduce((n,t)=>n+POINTS[t.card.value],0);return group(w)===group(s.turn)?pts:-pts}
+   let total=0;
+   const seenPool=pool.filter(c=>c.id!==candidate.id);
+   const attempts=36;
+   for(let k=0;k<attempts;k++){
+      const seq=simulated.slice(),used=new Set();
+      for(let j=0;j<following;j++){
+        const p=(s.turn+j+1)%s.count;
+        const choices=seenPool.filter(c=>!used.has(c.id));
+        if(!choices.length)break;
+        // More competent opponents tend to take winning tricks cheaply.
+        let pick=choices[Math.floor(Math.random()*choices.length)];
+        if(k%3!==0){
+          const now=seq.reduce((b,t)=>strength(t.card,seq[0].card.suit,trump)>strength(b.card,seq[0].card.suit,trump)?t:b,seq[0]);
+          const options=choices.filter(c=>strength(c,seq[0].card.suit,trump)>strength(now.card,seq[0].card.suit,trump));
+          if(options.length&&k%4!==0)pick=options.sort((a,b)=>STRENGTH[a.value]-STRENGTH[b.value])[0];
+        }
+        used.add(pick.id);seq.push({player:p,card:pick});
+      }
+      const w=winner(seq,trump),pts=seq.reduce((n,t)=>n+POINTS[t.card.value],0);
+      total+=(group(w)===group(s.turn)?pts:-pts);
+   }
+   return total/attempts;
+ }
+ let best=0,bestScore=-Infinity;for(let i=0;i<hand.length;i++){
+   const c=hand[i],score=outcome(c)+(evaluate(c)*.7)-(c.suit===trump?5:0);
+   if(score>bestScore){best=i;bestScore=score}
+ }
+ return best;
+}
+function scheduleAI(){if(state&&!state.finished&&state.turn!==0&&!state.busy){timer=setTimeout(()=>{if(state&&!state.finished&&state.turn!==0)play(state.turn,aiChoice(state.hands[state.turn]))},500)}}
+function render(){if(!state)return;const s=state,n=($("nickname").value.trim()||"Tu");$("self").textContent=n+" · "+s.hands[0].length+" carte";$("opponents").replaceChildren();for(let p=1;p<s.count;p++){const span=document.createElement("span");span.className="name";span.textContent="CPU "+p+" · "+s.hands[p].length+" carte";$("opponents").append(span)}$("round").textContent="Presa "+Math.min(s.round,Math.floor(40/s.count));$("remaining").textContent=s.deck.length+" carte nel mazzo";$("trump").textContent="Briscola: "+SYMBOLS[s.trump.suit]+" "+s.trump.suit;$("trickCards").replaceChildren();s.trick.forEach(t=>{const box=document.createElement("div");box.style.textAlign="center";box.append(cardEl(t.card));const cap=document.createElement("small");cap.textContent=t.player===0?n:"CPU "+t.player;box.append(cap);$("trickCards").append(box)});$("hand").replaceChildren();s.hands[0].forEach((card,index)=>{const el=cardEl(card,()=>play(0,index));el.disabled=s.turn!==0||s.busy||s.finished;$("hand").append(el)});$("score").textContent=s.scores.join(" · ");$("teams").textContent=s.count===4?"Squadre: tu + CPU 2 / CPU 1 + CPU 3":"Punti per giocatore (tu, CPU)";if(s.finished){const max=Math.max(...s.scores),w=s.scores.map((v,i)=>v===max?i:-1).filter(v=>v>=0);$("status").textContent="Partita terminata · "+(w.length>1?"Pareggio":w[0]===group(0)?"Hai vinto!":"Ha vinto "+(s.count===4?"la squadra avversaria":"CPU "+w[0]))+" · Totale "+s.scores.reduce((a,b)=>a+b,0)+"/120 punti"}else $("status").textContent=s.busy?"Assegnazione della presa…":s.turn===0?"È il tuo turno: scegli una carta.":"Sta giocando CPU "+s.turn+"…"}
+$("start").addEventListener("click",startGame);$("again").addEventListener("click",startGame);$("back").addEventListener("click",()=>{clearTimeout(timer);state=null;$("home").classList.remove("hidden");$("tablePage").style.display="none"});$("nickname").value=localStorage.getItem("tavolo-nickname")||"";$("nickname").addEventListener("change",e=>localStorage.setItem("tavolo-nickname",e.target.value.trim().slice(0,24)));
+</script></body></html>
